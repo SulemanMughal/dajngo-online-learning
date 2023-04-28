@@ -1,0 +1,60 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}My courses{% endblock %}
+{% block extra_style %}
+{% endblock extra_style %}
+{% block content %}
+<div class="container my-4">
+    <div class="row justify-content-center mx-auto">
+        <div class="col-12">
+            <div class="card mx-auto     border-0 bg-transparent" >
+                <div class="card-header bg-transparent border-0">
+                    <div class="row justify-content-center text-center">
+                        <div class="col">
+                            <h2 class="card-title fw-bolder  display-6">My courses</h2>  
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <div class="col text-end">
+                        <a href="{% url "courses:course_create" %}" class="btn btn-dark fs-5 text-uppercase rounded-0 mb-3 ">Create new
+                            course</a>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-2 g-4">
+                        
+                        {% for course in object_list %}
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title fs-4 fw-bolder">{{ course.title }}</h5>
+                                    <p class="card-text">{{ course.overview }}</p>
+                                    <a href="{% url "courses:course_edit" course.id %}" class="card-link btn btn-outline-success">Edit</a>
+                                    <a href="{% url "courses:course_delete" course.id %}" class="card-link btn btn-outline-danger">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <p class="card-text">You haven't created any courses yet.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {% endfor %}
+                        
+                    </div>
+                    
+                        
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extra_script %}
+{% endblock %}
